@@ -31,7 +31,7 @@ To install ensure that in the integrated terminal you have run 'npm init -y' to 
 
 
 ## Usage Information 
-To use the application in the integrated terminal run 'node .\index.js' and follow the command prompts. 
+To use the application in the integrated terminal run 'node index.js' and follow the command prompts. 
 ![Alt text](/app/pic/Screen Shot 2021-01-22 at 12.23.20 am.png)
   
 🎥 The full movie file showing functionality of the application can be found [here](https://drive.google.com/file/d/1o49f9gjDstJ5n21Im1kayH3Q-leIubQ4/view?usp=sharing)  
