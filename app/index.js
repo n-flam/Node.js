@@ -1,82 +1,111 @@
-const fs = require("fs");
-const inquirer = require("inquirer");
-let readMe;
+const inquirer = require('inquirer');
+const fs = require('fs');
 
-const promise = inquirer
-    .prompt([
-        {
-            type: "input",
-            message: "What is the title of your project?",
-            name: "title",
-        },
-        {
-            type: "input",
-            message: "Please give us a brief description about your project!",
-            name: "description",
-        },
-        {
-            type: "input",
-            message: "Please complete the INSTALLATION section of your readme file!",
-            name: "installation",
-        },
-        {
-            type: "input",
-            message: "Please complete the USAGE section of your readme file!",
-            name: "usage",
-        },
-        {
-            type: "input",
-            message: "Please complete the CONTRIBUTING section of your readme file!",
-            name: "contributing",
-        },
-        {
-            type: "input",
-            message: "Please complete the TEST section of your readme file!",
-            name: "test",
-        },
-        {
-            type: "list",
-            message: "Please give us a brief description about your project!",
-            choices: ["none", "BSD", "MIT", "GPL"],
-            name: "license",
-        },
-]);
+function getLicence(license) {
+    let link = '';
+    if(license === 'MIT')
+    {
+        link = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)'
+    }
+    else if (license === 'BSD')
+    {
+        link = '[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)'
+    }
+    else if (license === 'GPL') {
+        link = '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)'
+    }
+    else if (license === 'Mozilla') {
+        link = '[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)'
+    }
+    else if (license === 'IBM') {
+        link = '[![License: IPL 1.0](https://img.shields.io/badge/License-IPL%201.0-blue.svg)](https://opensource.org/licenses/IPL-1.0)'
+    }
+    return link
+}
 
-promise.then ((response) => {
-    // console.log(response);
-    const {title, description, installation, usage, contributing, test, license} = response;
-    // console.log(title, description, installation, usage, contributing, test, licence);
-    readMe = `# Title
-${title}
-      
+const getTemplate = ({title, description, installation, usage, license, contributing, tests, github, email })=> {
+const licenseURL = getLicence(license);
+return `# ${title}
+${licenseURL}
+# Table of Contents
+1. [Description](#description) 
+2. [Installation Instructions](#installation-instructions)  
+3. [Usage Information](#usage-information)  
+4. [License](#license)  
+5. [Contribution Guidelines](#contribution-guidelines)  
+6. [Test Instrucions](#test-instructions)  
+7. [Questions](#questions) 
 ## Description
 ${description}
-      
-## Table of Contents
-          
-* [Installation](#Installation)
-* [Usage](#Usage)
-* [Contributing](#Contributing)
-* [Test](#Test)
-* [License](#License)
-     
-## Installation
+## Installation Instructions
 ${installation}
-    
-## Usage
+## Usage Information 
 ${usage}
-      
-## Contributing
-${contributing}
-## Test
-${test}
-     
 ## License
-         
-The project uses the following licence: ${license}`;
-console.log(readMe);
+This project is licensed under the ${license} license.
+## Contribution Guidelines
+${contributing}
+## Test Instructions
+${tests}
+## Questions 
+Github:
+https://github.com/${github}
+Email:
+${email}
+`;
+}
 
-fs.writeFile('README.md', readMe, (err) => {
-err ? console.error(err) : console.log('Success!')
-    });
-});
+
+inquirer
+  .prompt([
+    {
+        type: 'input',
+        message: 'Please enter the title of your project?',
+        name: 'title',
+    },
+    {
+        type: 'input',
+        message: 'Please enter a description for your project?',
+        name: 'description',
+    },
+    {
+        type: 'input',
+        message: 'Please enter installation instructions for your project?',
+        name: 'installation',
+    },
+    {
+        type: 'input',
+        message: 'Please enter usage information for your project?',
+        name: 'usage',
+    },
+    {
+        type: 'list',
+        name: 'license',
+        message: 'Choose a license for your application?',
+        choices: ['BSD', 'MIT', 'GPL', 'Mozilla', 'IBM'],
+    },
+    {
+        type: 'input',
+        message: 'Please enter contribution guidelines for your project?',
+        name: 'contributing',
+    },
+    {
+        type: 'input',
+        message: 'Please enter test instructions for your project?',
+        name: 'tests',
+    },
+    {
+        type: 'input',
+        message: 'Please enter GitHub username?',
+        name: 'github',
+    },
+    {
+        type: 'input',
+        message: 'Please enter your email address?',
+        name: 'email',
+    },
+  ])
+  .then((response) =>
+    fs.writeFile("README.MD", getTemplate(response), (err) =>
+        err ? console.error(err) : console.log('Success!'))
+    );
