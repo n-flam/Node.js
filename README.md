@@ -26,13 +26,13 @@
 
 ## Installation Instructions
 To install ensure that in the integrated terminal you have run 'npm init -y' to initialise the JSON package, then run 'npm install inquirer'. If you have previously run the above commands, run 'npm install' install to ensure the dependencies are up to date. 
-![Alt text](/app/pic/Screen Shot 2021-01-22 at 12.22.06 am.png) 
-![Alt text](/app/pic/Screen Shot 2021-01-22 at 12.22.45 am.png)
+![Alt text](https://raw.githubusercontent.com/n-flam/Node.js/master/app/pic/Screen%20Shot%202021-01-22%20at%2012.22.06%20am.png) 
+![Alt text](https://raw.githubusercontent.com/n-flam/Node.js/master/app/pic/Screen%20Shot%202021-01-22%20at%2012.22.45%20am.png)
 
 
 ## Usage Information 
 To use the application in the integrated terminal run 'node index.js' and follow the command prompts. 
-![Alt text](/app/pic/Screen Shot 2021-01-22 at 12.23.20 am.png)
+![Alt text](https://raw.githubusercontent.com/n-flam/Node.js/master/app/pic/Screen%20Shot%202021-01-22%20at%2012.23.20%20am.png)
   
 🎥 The full movie file showing functionality of the application can be found [here](https://drive.google.com/file/d/1o49f9gjDstJ5n21Im1kayH3Q-leIubQ4/view?usp=sharing)  
   
